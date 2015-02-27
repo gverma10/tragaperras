@@ -4,44 +4,19 @@
     <meta charset="utf-8" />
     <title>GameZone - Slot Machine</title>
     <!-- CSS Section -->
-    <link href="css/main.css" rel="stylesheet" />
+    <link href="css/game.css" rel="stylesheet" />
 </head>
-<body>
-    <div>
-        <h1>Slot Machine</h1>
-        <div>
-            <h2>Player Statistics</h2>
-            <hr />
-            <ul id="playerStats">
-                <li id="jackpot">Jackpot: 500</li>
-                <li id="playerMoney">Player Money: 1000</li>
-                <li id="playerTurn">Turn: 0</li>
-                <li id="playerWins">Wins: 0</li>
-                <li id="playerLosses">Losses: 0</li>
-                <li id="playerWinRatio">Win Ratio: 0%</li>
-            </ul>
-            <hr />
-        </div>
-        <div id="betEntry">
-            <p>Place Your Bet Here</p>
-            <input id="playerBet" name="points" value="10">
-            <hr />
-        </div>
-
-        <button id="spinButton">Spin!</button>
-    </div>
-    <div id="result">
-        <h2>Spin Result</h2>
-        <hr />
-        <p></p>
-    </div>
-    <hr />
-    <div id="winOrLose">
-        <p></p>
-    </div>
+<body onload="init();">
+    <!-- Our CreateJS Game will be displayed here-->
+    <canvas id="canvas" width="500" height="550" style="border:3px double red"></canvas>
 
     <!-- JavaScript Section -->
-    <script src="js/jquery.js"></script>
-    <script src="js/main.js"></script>
+    <script src="Scripts/lib/easeljs-0.8.0.min.js"></script>
+    <script src="Scripts/lib/tweenjs-0.6.0.min.js"></script>
+    <script src="Scripts/lib/soundjs-0.6.0.min.js"></script>
+    <script src="Scripts/lib/preloadjs-0.6.0.min.js"></script>
+    <script src="Scripts/game.js"></script>
+    <script src="Scripts/jquery.js"></script>
+    
 </body>
 </html>

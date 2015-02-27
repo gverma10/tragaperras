@@ -1,0 +1,10 @@
+﻿body {
+    background-image: url('../images/casino_bg.jpg');
+    background-size:cover;
+    
+    float:right;
+}
+
+#canvas {
+    border: dashed 1px black;
+}
