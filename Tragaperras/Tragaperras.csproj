@@ -67,8 +67,8 @@
     <Content Include="images\reels\bell.png" />
     <Content Include="images\reels\blank.png" />
     <Content Include="images\reels\cherry.png" />
-    <Content Include="images\reels\grapes.png" />
-    <Content Include="images\reels\orange.png" />
+    <Content Include="images\reels\dollars.png" />
+    <Content Include="images\reels\hearts.png" />
     <Content Include="images\reels\seven.png" />
     <Content Include="images\reset.png" />
     <Content Include="images\spin.png" />

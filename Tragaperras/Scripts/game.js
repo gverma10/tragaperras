@@ -64,9 +64,9 @@ var fruits = "";
 var winRatio = 0;
 
 /* Tally Variables */
-var grapes = 0;
+var hearts = 0;
 var bananas = 0;
-var oranges = 0;
+var dollars = 0;
 var cherries = 0;
 var bars = 0;
 var bells = 0;
@@ -101,9 +101,9 @@ function gameLoop() {
 
 /* Utility function to reset all fruit tallies */
 function resetFruitTally() {
-    grapes = 0;
+    hearts = 0;
     bananas = 0;
-    oranges = 0;
+    dollars = 0;
     cherries = 0;
     bars = 0;
     bells = 0;
@@ -146,16 +146,16 @@ function Reels() {
                 blanks++;
                 break;
             case checkRange(outCome[spin], 28, 37):
-                betLine[spin] = "grapes";
-                grapes++;
+                betLine[spin] = "hearts";
+                hearts++;
                 break;
             case checkRange(outCome[spin], 38, 46):
                 betLine[spin] = "banana";
                 bananas++;
                 break;
             case checkRange(outCome[spin], 47, 54):
-                betLine[spin] = "orange";
-                oranges++;
+                betLine[spin] = "dollars";
+                dollars++;
                 break;
             case checkRange(outCome[spin], 55, 59):
                 betLine[spin] = "cherry";
@@ -181,11 +181,11 @@ function Reels() {
 /* This function calculates the player's winnings, if any */
 function determineWinnings() {
     if (blanks == 0) {
-        if (grapes == 3) {
+        if (hearts == 3) {
             winnings = playerBet * 10;
         } else if (bananas == 3) {
             winnings = playerBet * 20;
-        } else if (oranges == 3) {
+        } else if (dollars == 3) {
             winnings = playerBet * 30;
         } else if (cherries == 3) {
             winnings = playerBet * 40;
@@ -195,11 +195,11 @@ function determineWinnings() {
             winnings = playerBet * 75;
         } else if (sevens == 3) {
             winnings = playerBet * 100;
-        } else if (grapes == 2) {
+        } else if (hearts == 2) {
             winnings = playerBet * 2;
         } else if (bananas == 2) {
             winnings = playerBet * 2;
-        } else if (oranges == 2) {
+        } else if (dollars == 2) {
             winnings = playerBet * 3;
         } else if (cherries == 2) {
             winnings = playerBet * 4;
