@@ -94,6 +94,8 @@ var betMaxButton: Button;
 var betOneButton: Button;
 var resetButton: Button;
 var powerButton: Button;
+var betIncButton: Button;
+var betDecButton: Button;
 
 
 // FUNCTIONS ++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -352,6 +354,26 @@ function powerButtonClicked(event: createjs.MouseEvent) {
     window.close();
 }
 
+function betIncButtonClicked(event: createjs.MouseEvent) {
+
+    if (playerBet >= playerMoney)
+        alert("You are not allowed to bet more than this.");
+    else {
+        playerBet = playerBet + 10;
+        gameLoop();
+    }
+}
+
+function betDecButtonClicked(event: createjs.MouseEvent) {
+
+    if (playerBet <= 10)
+        alert("You are not allowed to bet bellow this.");
+    else {
+        playerBet = playerBet - 10;
+        gameLoop();
+    }
+}
+
 
 function createUI() {
 
@@ -403,6 +425,16 @@ function createUI() {
     powerButton = new Button("images/power.png", 5, 470);
     game.addChild(powerButton.getImage());
     powerButton.getImage().addEventListener("click", powerButtonClicked);
+
+    // Bet increase Button
+    betIncButton = new Button("images/arrow_up.png", 270, 420);
+    game.addChild(betIncButton.getImage());
+    betIncButton.getImage().addEventListener("click", betIncButtonClicked);
+
+    // Bet decrease Button
+    betDecButton = new Button("images/arrow_down.png", 320, 420);
+    game.addChild(betDecButton.getImage());
+    betDecButton.getImage().addEventListener("click", betDecButtonClicked);
 
 }
 

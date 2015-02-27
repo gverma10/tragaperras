@@ -80,6 +80,8 @@ var betMaxButton;
 var betOneButton;
 var resetButton;
 var powerButton;
+var betIncButton;
+var betDecButton;
 
 // FUNCTIONS ++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 function init() {
@@ -301,6 +303,24 @@ function powerButtonClicked(event) {
     window.close();
 }
 
+function betIncButtonClicked(event) {
+    if (playerBet >= playerMoney)
+        alert("You are not allowed to bet more than this.");
+    else {
+        playerBet = playerBet + 10;
+        gameLoop();
+    }
+}
+
+function betDecButtonClicked(event) {
+    if (playerBet <= 10)
+        alert("You are not allowed to bet bellow this.");
+    else {
+        playerBet = playerBet - 10;
+        gameLoop();
+    }
+}
+
 function createUI() {
     background = new createjs.Bitmap("images/slot_machine_face.png");
     game.addChild(background); // Add the background to the game container
@@ -342,6 +362,16 @@ function createUI() {
     powerButton = new Button("images/power.png", 5, 470);
     game.addChild(powerButton.getImage());
     powerButton.getImage().addEventListener("click", powerButtonClicked);
+
+    // Bet increase Button
+    betIncButton = new Button("images/arrow_up.png", 270, 420);
+    game.addChild(betIncButton.getImage());
+    betIncButton.getImage().addEventListener("click", betIncButtonClicked);
+
+    // Bet decrease Button
+    betDecButton = new Button("images/arrow_down.png", 320, 420);
+    game.addChild(betDecButton.getImage());
+    betDecButton.getImage().addEventListener("click", betDecButtonClicked);
 }
 
 function main() {

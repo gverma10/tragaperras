@@ -59,6 +59,8 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="images\arrow_down.png" />
+    <Content Include="images\arrow_up.png" />
     <Content Include="images\bet_max.png" />
     <Content Include="images\bet_one.png" />
     <Content Include="images\power.png" />
