@@ -1,7 +1,4 @@
-﻿// CreateJS Boilerplate for COMP397
-
-
-class Button {
+﻿class Button {
     //PRIVATE INSTANCE VARIABLES
     private _image: createjs.Bitmap;
     private _x: number;
@@ -70,7 +67,7 @@ var playerMoney = 1000;
 var winnings = 0;
 var jackpot = 5000;
 var turn = 0;
-var playerBet = 0;
+var playerBet = 100;
 var winNumber = 0;
 var lossNumber = 0;
 var spinResult;
@@ -115,10 +112,24 @@ function init() {
     main();
 }
 
+/* Utility function to display all the values/labels */
+function labels() {
+
+    var canvas : any = document.getElementById("canvas");
+    var text1 = canvas.getContext("2d");
+    text1.fillStyle = "red";
+    text1.font = "48px digital-7";
+    text1.fillText("Ca$h : "+playerMoney, 30, 90);
+    text1.fillText("Bet  : "+playerBet, 30, 130);
+
+}
+
 
 // GAMELOOP
 function gameLoop() {
+    
     stage.update();
+    labels();
 }
 
 
@@ -140,7 +151,7 @@ function resetAll() {
     winnings = 0;
     jackpot = 5000;
     turn = 0;
-    playerBet = 0;
+    playerBet = 10;
     winNumber = 0;
     lossNumber = 0;
     winRatio = 0;
@@ -257,28 +268,88 @@ function determineWinnings() {
             winnings = playerBet * 5;
         }
         winNumber++;
-        //showWinMessage();
+        showWinMessage();
     }
     else {
         lossNumber++;
-        //showLossMessage();
+        showLossMessage();
     }
+    
+}
+/* Utility function to show a win message and increase player money */
+function showWinMessage() {
+    playerMoney += winnings;
+    //$("div#winOrLose>p").text("You Won: $" + winnings);
+    resetFruitTally();
+    checkJackPot();
+}
 
+/* Utility function to show a loss message and reduce player money */
+function showLossMessage() {
+    playerMoney -= playerBet;
+    //$("div#winOrLose>p").text("You Lost!");
+    resetFruitTally();
+}
+
+/* Check to see if the player won the jackpot */
+function checkJackPot() {
+    /* compare two random values */
+    var jackPotTry = Math.floor(Math.random() * 51 + 1);
+    var jackPotWin = Math.floor(Math.random() * 51 + 1);
+    if (jackPotTry == jackPotWin) {
+        alert("You Won the $" + jackpot + " Jackpot!!");
+        playerMoney += jackpot;
+        jackpot = 1000;
+    }
 }
 
 
 // MAIN MEAT of my code goes here 
 function spinButtonClicked(event: createjs.MouseEvent) {
 
-    spinResult = Reels();
-    fruits = spinResult[0] + " - " + spinResult[1] + " - " + spinResult[2];
-    
-    // Iterate over the number of reels
-    for (var index = 0; index < NUM_REELS; index++) {
-        reelContainers[index].removeAllChildren();
-        tiles[index] = new createjs.Bitmap("images/reels/" + spinResult[index] + ".png");
-        reelContainers[index].addChild(tiles[index]);
+    if (playerMoney == 0) {
+        if (confirm("You ran out of Money! \nDo you want to play again?")) {
+            resetAll();
+            labels();
+        }
     }
+    else if (playerBet > playerMoney) {
+        alert("You don't have enough Money to place that bet.");
+    }
+    else if (playerBet < 0) {
+        alert("All bets must be a positive $ amount.");
+    }
+    else if (playerBet <= playerMoney) {
+        spinResult = Reels();
+        fruits = spinResult[0] + " - " + spinResult[1] + " - " + spinResult[2];
+        
+        determineWinnings();
+        turn++;
+
+        // Iterate over the number of reels
+        for (var index = 0; index < NUM_REELS; index++) {
+            reelContainers[index].removeAllChildren();
+            tiles[index] = new createjs.Bitmap("images/reels/" + spinResult[index] + ".png");
+            reelContainers[index].addChild(tiles[index]);
+        }
+
+    }
+    else {
+        alert("Please enter a valid bet amount");
+    }
+
+}
+
+function resetButtonClicked(event: createjs.MouseEvent) {
+
+    resetFruitTally();
+    resetAll();
+    main();
+}
+
+function powerButtonClicked(event: createjs.MouseEvent) {
+
+    window.close();
 }
 
 
@@ -295,43 +366,43 @@ function createUI() {
         game.addChild(reelContainers[index]);
     }
     reelContainers[0].x = 90;
-    reelContainers[0].y = 197;
+    reelContainers[0].y = 247;
     reelContainers[1].x = 190;
-    reelContainers[1].y = 197;
+    reelContainers[1].y = 247;
     reelContainers[2].x = 290;
-    reelContainers[2].y = 197;
+    reelContainers[2].y = 247;
 
 
 
     // Spin Button
-    spinButton = new Button("images/spin_button.png", 385, 425);
+    spinButton = new Button("images/spin_button.png", 385, 470);
     game.addChild(spinButton.getImage());
 
 
     // Spin Button Event Listeners
     spinButton.getImage().addEventListener("click", spinButtonClicked);
-
+    
     // Bet Max Button
-    betMaxButton = new Button("images/bet_max.png", 290, 425);
+    betMaxButton = new Button("images/bet_max.png", 290, 470);
     game.addChild(betMaxButton.getImage());
     betMaxButton.getImage().addEventListener("click", spinButtonClicked);
 
 
     // Bet One Button
-    betOneButton = new Button("images/bet_one.png", 195, 425);
+    betOneButton = new Button("images/bet_one.png", 195, 470);
     game.addChild(betOneButton.getImage());
     betOneButton.getImage().addEventListener("click", spinButtonClicked);
 
 
     // Reset Button
-    resetButton = new Button("images/reset.png", 100, 425);
+    resetButton = new Button("images/reset.png", 100, 470);
     game.addChild(resetButton.getImage());
-    resetButton.getImage().addEventListener("click", spinButtonClicked);
+    resetButton.getImage().addEventListener("click", resetButtonClicked);
 
     // Power Button
-    powerButton = new Button("images/power.png", 5, 425);
+    powerButton = new Button("images/power.png", 5, 470);
     game.addChild(powerButton.getImage());
-    powerButton.getImage().addEventListener("click", spinButtonClicked);
+    powerButton.getImage().addEventListener("click", powerButtonClicked);
 
 }
 
@@ -340,11 +411,13 @@ function main() {
     game = new createjs.Container(); // Instantiates the Game Container
 
     createUI();
-
+ 
     stage.addChild(game); // Adds the Game Container to the Stage
     
 
 }
+
+
 
 
 

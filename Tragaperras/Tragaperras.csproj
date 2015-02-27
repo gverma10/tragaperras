@@ -74,6 +74,7 @@
     <Content Include="images\spin.png" />
     <Content Include="images\spin_button.png" />
     <Content Include="Scripts\game.js.map" />
+    <Content Include="fonts\digital-7.ttf" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

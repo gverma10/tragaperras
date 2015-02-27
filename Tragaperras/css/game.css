@@ -1,4 +1,9 @@
-﻿body {
+﻿@font-face {
+    font-family: 'digital-7';
+    src: url('../fonts/digital-7.ttf') format('truetype');
+}
+
+body {
     background-image: url('../images/casino_bg.jpg');
     background-size:cover;
     
