@@ -68,18 +68,18 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="css\game.css" />
+    <Content Include="css\main.css" />
     <Content Include="images\casino_bg.jpg" />
     <Content Include="images\slot_machine_face.png" />
-    <Content Include="images\spin button1.png" />
     <Content Include="index.html" />
     <Content Include="Scripts\game.js" />
+    <Content Include="Scripts\jquery.js" />
+    <Content Include="Scripts\main.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <TypeScriptCompile Include="Scripts\game.ts" />
   </ItemGroup>
