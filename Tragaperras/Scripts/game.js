@@ -102,13 +102,19 @@ function labels() {
     var text1 = canvas.getContext("2d");
     text1.fillStyle = "red";
     text1.font = "48px digital-7";
-    text1.fillText("Ca$h : " + playerMoney, 30, 90);
-    text1.fillText("Bet  : " + playerBet, 30, 130);
+    text1.fillText("Ca$h:" + playerMoney, 30, 90);
+    text1.fillText("Bet :" + playerBet, 30, 130);
+    text1.fillText(jackpot, 310, 130);
 
     var text2 = canvas.getContext("2d");
     text2.fillStyle = "black";
     text2.font = "18px Arial";
     text2.fillText("Change bet amount : ", 90, 442);
+
+    var text3 = canvas.getContext("2d");
+    text3.fillStyle = "blue";
+    text3.font = "32px Segoe Script";
+    text3.fillText("Jackpot", 290, 80);
 }
 
 // GAMELOOP
@@ -245,8 +251,6 @@ function determineWinnings() {
 /* Utility function to show a win message and increase player money */
 function showWinMessage() {
     playerMoney += winnings;
-
-    //$("div#winOrLose>p").text("You Won: $" + winnings);
     resetFruitTally();
     checkJackPot();
 }
@@ -254,8 +258,6 @@ function showWinMessage() {
 /* Utility function to show a loss message and reduce player money */
 function showLossMessage() {
     playerMoney -= playerBet;
-
-    //$("div#winOrLose>p").text("You Lost!");
     resetFruitTally();
 }
 
@@ -271,7 +273,7 @@ function checkJackPot() {
     }
 }
 
-// MAIN MEAT of my code goes here
+// Spin button clicked and the values for the reels are fetched
 function spinButtonClicked(event) {
     if (playerMoney == 0) {
         if (confirm("You ran out of Money! \nDo you want to play again?")) {
@@ -299,16 +301,19 @@ function spinButtonClicked(event) {
     }
 }
 
+//when the user wants to restart the game over
 function resetButtonClicked(event) {
     resetFruitTally();
     resetAll();
     main();
 }
 
+//when the user wants to exit the game
 function powerButtonClicked(event) {
     window.close();
 }
 
+//enables user to increase th bet money
 function betIncButtonClicked(event) {
     if (playerBet >= playerMoney)
         alert("You are not allowed to bet more than this.");
@@ -318,6 +323,7 @@ function betIncButtonClicked(event) {
     }
 }
 
+//enables user to decrease th bet money
 function betDecButtonClicked(event) {
     if (playerBet <= 10)
         alert("You are not allowed to bet bellow this.");
@@ -327,6 +333,7 @@ function betDecButtonClicked(event) {
     }
 }
 
+//this will enable user to bet the lowest amount at one spin
 function betOneButtonClicked(event) {
     playerBet = 10;
     spinResult = Reels();
@@ -342,6 +349,7 @@ function betOneButtonClicked(event) {
     }
 }
 
+//this will enable user to bet the highest amount which is total money of user in this case on single spin
 function betMaxButtonClicked(event) {
     playerBet = playerMoney;
     spinResult = Reels();
@@ -357,6 +365,7 @@ function betMaxButtonClicked(event) {
     }
 }
 
+//To generate the user interface of the game
 function createUI() {
     background = new createjs.Bitmap("images/slot_machine_face.png");
     game.addChild(background); // Add the background to the game container

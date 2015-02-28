@@ -122,13 +122,19 @@ function labels() {
     var text1 = canvas.getContext("2d");
     text1.fillStyle = "red";
     text1.font = "48px digital-7";
-    text1.fillText("Ca$h : " + playerMoney, 30, 90);
-    text1.fillText("Bet  : " + playerBet, 30, 130);
+    text1.fillText("Ca$h:" + playerMoney, 30, 90);
+    text1.fillText("Bet :" + playerBet, 30, 130);
+    text1.fillText(jackpot, 310, 130);
 
     var text2 = canvas.getContext("2d");
     text2.fillStyle = "black";
     text2.font = "18px Arial";
     text2.fillText("Change bet amount : ", 90, 442);
+
+    var text3 = canvas.getContext("2d");
+    text3.fillStyle = "blue";
+    text3.font = "32px Segoe Script";
+    text3.fillText("Jackpot", 290, 80);
     
 }
 
@@ -287,7 +293,6 @@ function determineWinnings() {
 /* Utility function to show a win message and increase player money */
 function showWinMessage() {
     playerMoney += winnings;
-    //$("div#winOrLose>p").text("You Won: $" + winnings);
     resetFruitTally();
     checkJackPot();
 }
@@ -295,7 +300,6 @@ function showWinMessage() {
 /* Utility function to show a loss message and reduce player money */
 function showLossMessage() {
     playerMoney -= playerBet;
-    //$("div#winOrLose>p").text("You Lost!");
     resetFruitTally();
 }
 
@@ -312,7 +316,7 @@ function checkJackPot() {
 }
 
 
-// MAIN MEAT of my code goes here 
+// Spin button clicked and the values for the reels are fetched
 function spinButtonClicked(event: createjs.MouseEvent) {
 
     if (playerMoney == 0) {
@@ -348,6 +352,7 @@ function spinButtonClicked(event: createjs.MouseEvent) {
 
 }
 
+//when the user wants to restart the game over
 function resetButtonClicked(event: createjs.MouseEvent) {
 
     resetFruitTally();
@@ -355,11 +360,13 @@ function resetButtonClicked(event: createjs.MouseEvent) {
     main();
 }
 
+//when the user wants to exit the game
 function powerButtonClicked(event: createjs.MouseEvent) {
 
     window.close();
 }
 
+//enables user to increase th bet money
 function betIncButtonClicked(event: createjs.MouseEvent) {
 
     if (playerBet >= playerMoney)
@@ -370,6 +377,7 @@ function betIncButtonClicked(event: createjs.MouseEvent) {
     }
 }
 
+//enables user to decrease th bet money
 function betDecButtonClicked(event: createjs.MouseEvent) {
 
     if (playerBet <= 10)
@@ -380,6 +388,7 @@ function betDecButtonClicked(event: createjs.MouseEvent) {
     }
 }
 
+//this will enable user to bet the lowest amount at one spin
 function betOneButtonClicked(event: createjs.MouseEvent) {
 
     playerBet = 10;
@@ -397,6 +406,7 @@ function betOneButtonClicked(event: createjs.MouseEvent) {
     }
 }
 
+//this will enable user to bet the highest amount which is total money of user in this case on single spin
 function betMaxButtonClicked(event: createjs.MouseEvent) {
 
     playerBet = playerMoney;
@@ -416,6 +426,7 @@ function betMaxButtonClicked(event: createjs.MouseEvent) {
 
 
 
+//To generate the user interface of the game
 function createUI() {
 
     background = new createjs.Bitmap("images/slot_machine_face.png");

@@ -77,6 +77,7 @@
     <Content Include="images\spin_button.png" />
     <Content Include="Scripts\game.js.map" />
     <Content Include="fonts\digital-7.ttf" />
+    <Content Include="Documentation\External Game Document - Gurinder Verma - 300811333.docx" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -88,7 +89,7 @@
     <Content Include="css\game.css" />
     <Content Include="images\casino_bg.jpg" />
     <Content Include="images\slot_machine_face.png" />
-    <Content Include="index.html" />
+    <Content Include="asign2.html" />
     <Content Include="Scripts\game.js" />
     <Content Include="Scripts\jquery.js" />
     <Content Include="Scripts\lib\easeljs-0.8.0.min.js" />
